@@ -1,13 +1,9 @@
 import AppleCounter from './components/AppleCounter'
 
-const App = () => {
+const App = ({root}) => {
   return (
     <div>
-      <AppleCounter
-        onClick={(e) => {
-          console.log(e)
-        }}
-      />
+      <AppleCounter root={root}/>
     </div>
   )
 }

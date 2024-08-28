@@ -4,30 +4,28 @@ import LeftArrow from '../assets/images/left-arrow.png'
 import RightArrow from '../assets/images/right-arrow.jpg'
 import AppleBasket from './AppleBasket'
 
-import { createRoot } from 'react-dom/client'
-
-const root = createRoot(document.querySelector('#root'))
-
 import './AppleCounter.css'
+import { useState } from 'react'
 
-const totalAppleCount = 10
 
-let rightAppleCount = 0
-let leftAppleCount = totalAppleCount - rightAppleCount
+// let rightAppleCount = 0
+// let leftAppleCount = totalAppleCount - rightAppleCount
 
-const AppleCounter = () => {
+const AppleCounter = ({root}) => {
+  const totalAppleCount = 10
+  const [rightAppleCount, setRightAppleCount] = useState(0)
+  const [leftAppleCount, setLeftAppleCount] = useState(totalAppleCount - rightAppleCount)
+
   const leftClickHandler = () => {
     if (rightAppleCount > 0) {
-      rightAppleCount--
-      leftAppleCount++
-      root.render(<AppleCounter />)
+      setRightAppleCount(rightAppleCount - 1)
+      setLeftAppleCount(leftAppleCount + 1)
     }
   }
   const rightClickHandler = () => {
     if (leftAppleCount > 0) {
-      leftAppleCount--
-      rightAppleCount++
-      root.render(<AppleCounter />)
+      setRightAppleCount(rightAppleCount + 1)
+      setLeftAppleCount(leftAppleCount - 1)
     }
   }
 
@@ -47,14 +45,14 @@ const AppleCounter = () => {
         />
         <AppleBasket appleCount={rightAppleCount} basketName="Basket 2" />
       </section>
-      <p
+      {/* <p
         style={{
           textAlign: 'center',
           marginTop: '32px',
         }}
       >
         <button onClick={() => {}}>Re - Render</button>
-      </p>
+      </p> */}
     </>
   )
 }
